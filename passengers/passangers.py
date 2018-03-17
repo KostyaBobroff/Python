@@ -1,7 +1,6 @@
 # -*- encoding: utf-8 -*-
 
 def passenger_walk(trains, passenger_name, steps):
-    flag = False
     for train in trains:
         for car in train['cars']:
             if passenger_name in car['people']:
@@ -45,13 +44,13 @@ def process(data, events, car):
     print(events)
     for event in events:
         if event['type'] == 'walk':
-            result_from_walk = passenger_walk(data, event['passenger'], event['distance'])
-            if result_from_walk == -1:
+
+            if passenger_walk(data, event['passenger'], event['distance']) == -1:
                 return -1
 
         if event['type'] == 'switch':
-            result_from_switch = cars_switch(event, data)
-            if result_from_switch == -1:
+
+            if cars_switch(event, data) == -1:
                 return -1
 
     for dat in data:
