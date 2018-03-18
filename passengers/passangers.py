@@ -1,4 +1,6 @@
 # -*- encoding: utf-8 -*-
+import json
+
 
 def passenger_walk(trains, passenger_name, steps):
     for train in trains:
@@ -44,28 +46,23 @@ def passenger_walk(trains, passenger_name, steps):
 def cars_switch(event, trains):
     first_train = None
     second_train = None
-    for train_index, train in enumerate(trains):
+    for train_index, train in trains:
 
         if train['name'] == event['train_from']:
-            print('this is cars ', event['cars'])
             first_train = train
-            first_train_index = train_index
         if train['name'] == event['train_to']:
             second_train = train
 
     if second_train and first_train and 1 <= event['cars'] <= len(first_train['cars']):
-        coupling_cars = first_train['cars'][first_train_index + event['cars']:]
+        coupling_cars = first_train['cars'][-event['cars']:]
         first_train['cars'] = first_train['cars'][:-event['cars']]
         second_train['cars'].extend(coupling_cars)
-        print(trains)
         return 1
     else:
         return -1
 
 
 def process(data, events, car):
-    print(data)
-    print(events)
     for event in events:
         if event['type'] == 'walk':
 
@@ -82,3 +79,12 @@ def process(data, events, car):
             if car == carriage['name']:
                 return len(carriage['people'])
     return -1
+
+# error_message = 'ERROR in file {}. Expected: "{}", got: "{}"'
+# data = json.load(open('./tests/test6.json'))
+# trains, events, result = data['trains'], data['events'], data['result']
+# got = process(trains, events, result['car'])
+# expected = result['amount']
+# if got != expected:
+#     print(error_message.format('./tests/test6.json', expected, got))
+# print("All tests passed!")
