@@ -37,10 +37,12 @@ def process(data, events, car):
             if passenger_walk(data, event['passenger'], event['distance']) == -1:
                 return -1
 
-        if event['type'] == 'switch':
+        elif event['type'] == 'switch':
 
             if cars_switch(event, data) == -1:
                 return -1
+        else:
+            return -1
 
     for train in data:
         print(train['name'])
