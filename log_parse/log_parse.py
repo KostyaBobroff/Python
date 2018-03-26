@@ -4,10 +4,6 @@ from collections import Counter
 
 
 def parse_urls_without_files(logs):
-    # #string = re.sub(r"(?<=./)[-.\w]+[.]\w+(?=[?\s])","",arr[0])
-    # for log in logs:
-    #     parser = re.search('(?<=//)[\w]*:?[\w]*@?[\w]*:?[\d]*[/]?[^?\s]*', log['url'])
-    #     if parser and not re.search('\w+\.\w+$',parser.group()):
     for log in logs[:]:
         parser = re.search(r"(?<=./)[-.\w]+[.]\w+(?=[?\s])", log)
         if parser:
@@ -109,24 +105,5 @@ def parse(
     else:
         urls = parse_urls(data, urls)
 
-        # urls = par
-    ####datetime.datetime(2005, 7, 14, 0, 0)
-    ####d.strftime("%d/%b/%Y")
-
-    # if ignore_files:
-    #     log_dict = parse_urls_without_files(data)
-    # regexp for URLS
-    # <схема>:[//[<логин>:<пароль>@]<хост>[:<порт>]][/]<URL‐путь>[?<параметры>][#<якорь>]
-    # [a-z]*:[/]{2}[\w]*:?[\w]*@?[\w]*:?[\d]*[/]?[^?\s]*
-    # regex для урлов без файлов в листе)
-    # (?<=/)[\w]+.[\w]+$
-    # regex для урлов когда bool в листе)
-    # (?<=//)[\w]*:?[\w]*@?[\w]*:?[\d]*[/]?[^?\s]*/
-    #  urls = Counter()
-    #  urls = parse_urls_without_www(data,urls)
-    result = list()
-    # for i in urls.most_common(5):
-    #     result
     result = list(map(lambda x: x[1], urls.most_common(5)))
     return result
-
